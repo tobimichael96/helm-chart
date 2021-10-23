@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Generic Helm chart that can deploy anything
+name: generic-helm
+version: 0.0.1

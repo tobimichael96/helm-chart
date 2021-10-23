@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
+  annotations:
+    {{ .Values.ingress.annotations | toYaml | indent 4 | trim }}
+spec:
+  tls:
+    {{ toYaml .Values.ingress.tls }}
+  rules:
+    {{ toYaml .Values.ingress.hosts }}

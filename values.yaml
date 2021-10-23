@@ -1,0 +1,31 @@
+image:
+  repository: repository # repository of the image
+  tag:  tag # tag of the image
+  pullPolicy: IfNotPresent
+
+namespace: # namespace defaults to deployment name
+
+deployment:
+  name: default # name of the deployment, will also be the name of the service
+  containerPort: 80
+  environmentVariables: # array of environment variables
+  #  - name: "ExampleKey"
+  #    value: "ExampleValue"
+  requests:
+    # cpu: 50m
+  limits:
+    # cpu: 100m
+
+service:
+  port: 80
+
+ingress:
+  annotations: {}
+  tls:
+  hosts:
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  averageUtilization: 60

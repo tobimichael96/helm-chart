@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          {{ if .Values.deployment.environmentVariables }}
+          env:
+            {{ .Values.deployment.environmentVariables | toYaml | indent 12 | trim }}
+          {{ end }}
+          {{ if or .Values.deployment.requests .Values.deployment.limits }}
+          resources:
+            {{ if .Values.deployment.requests }}
+            requests:
+              {{ .Values.deployment.requests | toYaml | trim }}
+            {{ end }}
+            {{ if .Values.deployment.limits }}
+            limits:
+              {{ .Values.deployment.limits | toYaml | trim }}
+            {{ end }}
+          {{ end }}
+          ports:
+            - containerPort: {{ .Values.deployment.containerPort }}
