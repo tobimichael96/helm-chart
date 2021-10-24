@@ -2,11 +2,11 @@ apiVersion: v1
 entries:
   generic-helm:
   - apiVersion: v1
-    created: "2021-10-24T16:34:03.216397+02:00"
+    created: "2021-10-24T16:40:28.033579+02:00"
     description: Generic Helm chart that can deploy anything
     digest: 0997cf74cba6aa9477d48d720b60b13b7edd526bd3e95e4532e131ef98d60261
     name: generic-helm
     urls:
-    - https://TobiMichael96.github.io/helm-chart/generic-helm-0.0.1.tgz
+    - https://TobiMichael96.github.io/generic-helm/generic-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2021-10-24T16:34:03.214998+02:00"
+generated: "2021-10-24T16:40:28.031574+02:00"
