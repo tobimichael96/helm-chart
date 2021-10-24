@@ -1,7 +1,6 @@
 image:
   repository: repository # repository of the image
   tag:  tag # tag of the image
-  pullPolicy: IfNotPresent
 
 namespace: # namespace defaults to deployment name
 
