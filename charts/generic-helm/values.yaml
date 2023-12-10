@@ -43,9 +43,9 @@ deploymentStrategy:
 
 configMap:
   enabled: true
-  data: #{}
-    test.conf: |
-      test_allow true
+  data: {}
+#    test.conf: |
+#      test_allow true
 
 hpa:
   enabled: false
