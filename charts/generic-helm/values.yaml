@@ -32,6 +32,7 @@ persistence:
   enabled: false
   storageClass: local-storage
   existingClaim: ""
+  mountPath: "/config"
   # if you need any additional volumes, you can define them here
   additionalVolumes: []
   # if you need any additional volume mounts, you can define them here
@@ -41,10 +42,10 @@ deploymentStrategy:
   type: RollingUpdate
 
 configMap:
-  enabled: false
-  data: {}
-#    test.conf: |
-#      test_allow true
+  enabled: true
+  data: #{}
+    test.conf: |
+      test_allow true
 
 hpa:
   enabled: false
