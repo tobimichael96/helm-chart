@@ -1,11 +1,18 @@
+{{ if .Values.service.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
   namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
+  labels:
+    app: {{ .Values.deployment.name }}
+    chart: generic-helm
 spec:
   selector:
     app: {{ .Values.deployment.name }}
+    chart: generic-helm
+  type: {{ .Values.service.type }}
   ports:
     - protocol: TCP
-      port: {{ .Values.service.port }}
+      port: {{ if .Values.service.port }} {{ .Values.service.port }} {{ else }} {{ .Values.deployment.containerPort }} {{ end }}
+{{ end }}

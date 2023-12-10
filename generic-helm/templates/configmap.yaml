@@ -1,0 +1,15 @@
+{{ if .Values.configMap.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
+  labels:
+    app: {{ .Values.deployment.name }}
+    chart: generic-helm
+data:
+{{- range $path, $config := .Values.configMap.data }}
+  {{ $path }}: |
+{{ $config | indent 4 -}}
+{{- end -}}
+{{ end }}

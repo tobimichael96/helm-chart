@@ -4,18 +4,41 @@ metadata:
   name: {{ .Values.deployment.name }}
   namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
 spec:
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.deployment.name }}
+      chart: generic-helm
+  strategy:
+    type: {{ .Values.deploymentStrategy.type }}
   template:
     metadata:
       labels:
         app: {{ .Values.deployment.name }}
+        chart: generic-helm
     spec:
+      volumes:
+        - name: config
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim }}
+          {{- end }}
+          {{- if .Values.persistence.additionalVolumes }}
+            {{- .Values.persistence.additionalVolumes | toYaml | nindent 8 }}
+          {{- end }}
       containers:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          {{ if .Values.deployment.environmentVariables }}
+          imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            {{- if .Values.persistence.additionalMounts }}
+              {{- .Values.persistence.additionalMounts | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          {{ if .Values.deployment.envVars }}
           env:
             {{ .Values.deployment.environmentVariables | toYaml | indent 12 | trim }}
           {{ end }}

@@ -4,6 +4,9 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Values.deployment.name }}
   namespace: {{ if .Values.namespace }} {{ .Values.namespace }} {{ else }} {{ .Values.deployment.name }} {{ end }}
+  labels:
+    app: {{ .Values.deployment.name }}
+    chart: generic-helm
 spec:
   minReplicas: {{ .Values.hpa.minReplicas }}
   maxReplicas: {{ .Values.hpa.maxReplicas }}
