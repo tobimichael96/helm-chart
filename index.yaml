@@ -2,6 +2,14 @@ apiVersion: v1
 entries:
   generic-helm:
   - apiVersion: v1
+    created: "2023-12-10T17:05:28.022039546Z"
+    description: Generic Helm chart that can deploy anything
+    digest: 12435f40701931dca531009da4435283d965fcdf6b0b7475901ac2dfb63efa42
+    name: generic-helm
+    urls:
+    - https://github.com/tobimichael96/helm-chart/releases/download/generic-helm-0.0.3/generic-helm-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v1
     created: "2023-12-10T16:54:29.943906379Z"
     description: Generic Helm chart that can deploy anything
     digest: b9ad5d65767c1aa58315caba7a6fe03e6bad29125940acb47b3677457c67caa0
@@ -17,4 +25,4 @@ entries:
     urls:
     - https://github.com/tobimichael96/helm-chart/releases/download/generic-helm-0.0.1/generic-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2023-12-10T16:54:29.943914103Z"
+generated: "2023-12-10T17:05:28.02205249Z"
