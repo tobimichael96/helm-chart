@@ -27,11 +27,12 @@ rules:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
+            pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ .Values.deployment.name }}
+                name: {{ $.Values.deployment.name }}
                 port:
-                  number: {{ .Values.service.port }}
+                  number: {{ $.Values.service.port }}
           {{- end }}
     {{- end }}
 {{ end }}
