@@ -20,19 +20,19 @@ spec:
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
-rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
-      http:
-        paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
-            backend:
-              service:
-                name: {{ $.Values.deployment.name }}
-                port:
-                  number: {{ $.Values.service.port }}
-          {{- end }}
-    {{- end }}
+  rules:
+      {{- range .Values.ingress.hosts }}
+      - host: {{ .host | quote }}
+        http:
+          paths:
+            {{- range .paths }}
+            - path: {{ .path }}
+              pathType: {{ .pathType }}
+              backend:
+                service:
+                  name: {{ $.Values.deployment.name }}
+                  port:
+                    number: {{ $.Values.service.port }}
+            {{- end }}
+      {{- end }}
 {{ end }}
