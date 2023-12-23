@@ -21,18 +21,18 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-      {{- range .Values.ingress.hosts }}
-      - host: {{ .host | quote }}
-        http:
-          paths:
-            {{- range .paths }}
-            - path: {{ .path }}
-              pathType: {{ .pathType }}
-              backend:
-                service:
-                  name: {{ $.Values.deployment.name }}
-                  port:
-                    number: {{ $.Values.service.port }}
-            {{- end }}
-      {{- end }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
+            backend:
+              service:
+                name: {{ $.Values.deployment.name }}
+                port:
+                  number: {{ if $.Values.service.port }} {{ $.Values.service.port }} {{ else }} {{ $.Values.deployment.containerPort }} {{ end }}
+          {{- end }}
+    {{- end }}
 {{ end }}
