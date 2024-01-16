@@ -9,6 +9,8 @@ deployment:
   replicas: 1
   name: default # name of the deployment, will also be the name of the service
   containerPort: 80
+  hostNetwork: false
+  hostPort:
   envVars: {}
   #  - name: "ExampleKey"
   #    value: "ExampleValue"
