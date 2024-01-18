@@ -17,6 +17,10 @@ spec:
         app: {{ .Values.deployment.name }}
         chart: generic-helm
     spec:
+      {{- if .Values.deployment.initContainers }}
+      initContainers:
+        {{- .Values.deployment.initContainers | toYaml | nindent 8 }}
+      {{- end }}
       {{- if or .Values.persistence.enabled .Values.configMap.enabled }}
       volumes:
         {{- if or .Values.persistence.enabled }}
